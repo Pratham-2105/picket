@@ -1,0 +1,27 @@
+# Picket — what git should pretend doesn't exist.
+# Rule: commit inputs, never outputs. Anything a build or tool can recreate stays out.
+
+# Build output. Our presets put every build in build/<preset-name>/.
+build/
+# Visual Studio's own default CMake output folder, in case you open the folder in VS.
+out/
+
+# Personal CMake presets (your own paths/toolchains). CMakePresets.json is shared and committed.
+CMakeUserPresets.json
+
+# clangd for Neovim: CMake generates compile_commands.json in build/, we link it here.
+compile_commands.json
+.cache/
+
+# Editors and OS clutter.
+.vscode/
+.vs/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Heartland belongs to Shockfront Studios: private experimentation only (spec, Map licensing).
+maps/private/
+# Height files are always baked from an image, so none is ever committed.
+*.pkh

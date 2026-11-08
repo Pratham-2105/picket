@@ -1,0 +1,10 @@
+# Picket — how git treats file contents.
+
+# Store every text file with LF endings, and check it out as LF on every OS.
+# Without this, an edit on Windows (CRLF) and one in WSL (LF) make every line look changed.
+* text=auto eol=lf
+
+# Binary files: never convert their bytes, never diff or merge them as text.
+*.png binary
+*.jpg binary
+*.pkh binary
