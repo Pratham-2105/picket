@@ -46,8 +46,26 @@ FetchContent_MakeAvailable(raylib googletest)
 
 enable_testing()
 
-# --- Our targets (added in later steps) ---
-# sim/      -> picket_sim       static library, NEVER links raylib
+# --- Our targets ---
+
+# The simulation: everything about the world. NEVER links raylib or ImGui.
+add_library(picket_sim STATIC
+    sim/map.cpp
+)
+# Our code includes headers as "sim/map.h", so the include root is the repo itself.
+target_include_directories(picket_sim PUBLIC ${CMAKE_SOURCE_DIR})
+picket_warnings(picket_sim)
+
+# Tests: one executable linked to the simulation and GoogleTest (gtest_main supplies main()).
+add_executable(picket_tests
+    tests/tests.cpp
+)
+target_link_libraries(picket_tests PRIVATE picket_sim gtest_main)
+picket_warnings(picket_tests)
+
+include(GoogleTest)
+gtest_discover_tests(picket_tests)
+
+# Still to come:
 # headless/ -> picket_headless  links picket_sim
 # game/     -> picket           links picket_sim + raylib
-# tests/    -> picket_tests     links picket_sim + GoogleTest

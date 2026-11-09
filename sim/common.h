@@ -40,6 +40,7 @@ namespace picket
     inline float dot(Vec2 a, Vec2 b) { return a.x * b.x + a.y * b.y; }
     inline float length(Vec2 v) { return std::sqrt(dot(v, v)); }
     inline float distance(Vec2 a, Vec2 b) { return length(b - a); }
+    inline float lengthSquared(Vec2 v) { return dot(v, v); }
 
     inline Vec2 normalized(Vec2 v)
     {
